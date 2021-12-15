@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../Services/fetchData';
 
@@ -10,7 +10,7 @@ export default function City({cities}){
         fetchData(lat,lon);
       },[lat,lon])
  
-const [weather,setWeather] = useState({current:{},hourly:[],daily:[]});    
+// const [weather,setWeather] = useState({current:{},hourly:[],daily:[]});    
 
     return (
         <div>City</div>
