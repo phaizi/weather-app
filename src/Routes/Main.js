@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {Regions} from '../Services/Regions';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -150,6 +151,7 @@ return (
         aria-haspopup="true"
         aria-expanded={openCountry ? 'true' : undefined}
         onClick={handleClickCountry}
+        endIcon={<KeyboardArrowDownIcon />}
       >
         Country
       </Button>
@@ -186,6 +188,7 @@ return (
         aria-controls="basic-menu"
         aria-haspopup="true"
         aria-expanded={openCity ? 'true' : undefined}
+        endIcon={<KeyboardArrowDownIcon />}
         onClick={handleClickCity}
       >
         City
