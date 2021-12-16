@@ -4,29 +4,29 @@ import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { SelectedCityContext } from '../Services/contexts';
+import { SelectedContext } from '../Services/contexts';
 import {Regions} from '../Services/Regions';
 
 
-export default function NavBar({setSelectedCountry, setSearchCountry, setSearchCity}) {
+export default function NavBar({ setSearchCountry, setSearchCity}) {
 
-    const [selectedCity,setSelectedCity] = useContext(SelectedCityContext);
+    const [selected,setSelected] = useContext(SelectedContext);
     useEffect(()=>{
-        if(!selectedCity){
+        if(!selected.city){
 
             const url = window.location.pathname;
             const endIndex =url.slice(1).indexOf('/');
-        let city = url.slice(1,endIndex+1);
+        let city = endIndex===-1?url.slice(1):url.slice(1,endIndex+1);
         city = city.charAt(0).toUpperCase() + city.slice(1);
         const countries = Object.keys(Regions);
         countries.forEach((country) => {
             if(city in Regions[country]){
-                setSelectedCountry(country);
+                setSelected({country, city});
                 setSearchCountry(country);
                 console.log('selectedCountry = ',country);
             }
         })
-        setSelectedCity(city);
+        // setSelected({...selected, city});
         setSearchCity(city);
         console.log('url city is = ', city);
       } 
@@ -58,14 +58,14 @@ export default function NavBar({setSelectedCountry, setSearchCountry, setSearchC
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab component={Link} value='/' to={`/${selectedCity}/`} label="Today" 
-        disabled={!selectedCity}
+          <Tab component={Link} value='/' to={`/${selected.city}/`} label="Today" 
+        disabled={!selected.city}
           />
-          <Tab component={Link} value='/hourly/' to= {`/${selectedCity}/hourly`} label="Hourly" 
-          disabled={!selectedCity}
+          <Tab component={Link} value='/hourly/' to= {`/${selected.city}/hourly/`} label="Hourly" 
+          disabled={!selected.city}
           />
-          <Tab component={Link} value='/daily/' to={`/${selectedCity}/daily`} label="Daily" 
-          disabled={!selectedCity}
+          <Tab component={Link} value='/daily/' to={`/${selected.city}/daily/`} label="Daily" 
+          disabled={!selected.city}
           />
         </Tabs>
       </AppBar>

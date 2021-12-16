@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {Regions} from '../Services/Regions';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import NavBar from '../Components/NavBar';
-import { SelectedCityContext } from '../Services/contexts';
+import { SelectedContext } from '../Services/contexts';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,10 +61,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Main() {
 
-const [selectedCountry,setSelectedCountry] = useState('');
+// const [selectedCountry,setSelectedCountry] = useState('');
 const [searchCountry,setSearchCountry] = useState('');
 const [searchCity,setSearchCity] = useState('');
-const setSelectedCity = useContext(SelectedCityContext)[1];
+const [selected,setSelected] = useContext(SelectedContext);
 const navigate = useNavigate();
 
 const handleSearchCountry = (event)=>{
@@ -72,16 +72,16 @@ const handleSearchCountry = (event)=>{
     country = country.charAt(0).toUpperCase() + country.slice(1);
     setSearchCountry(country);  
     if(country in Regions){
-      setSelectedCountry(country);
+      setSelected({...selected,country});
   }}
  
 const handleSearchCity = (event)=>{
     let city = event.target.value;
     city = city.charAt(0).toUpperCase() + city.slice(1);
     setSearchCity(city); 
-        if(city in Regions[selectedCountry]){
-          setSelectedCity(city);
-          navigate(`/${city}`);
+        if(city in Regions[selected.country]){
+          setSelected({...selected,city});
+          navigate(`/${city}/`);
       }}
 
 
@@ -94,7 +94,7 @@ const handleSearchCity = (event)=>{
   const handleCloseCountry = (event) => {
       const country = event.currentTarget.innerText;
       if(country){
-          setSelectedCountry(country)
+          setSelected({...selected, country})
         setSearchCountry(country);
       }
     console.log('on cllos = ',event.currentTarget.innerText);
@@ -110,7 +110,7 @@ const handleSearchCity = (event)=>{
   const handleCloseCity = (event) => {
     const city = event.currentTarget.innerText;
     if(city){
-        setSelectedCity(city);
+        setSelected({...selected,city});
         setSearchCity(city);
         navigate(`/${city}`);
       }
@@ -121,15 +121,6 @@ return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
@@ -184,7 +175,7 @@ return (
               inputProps={{ 'aria-label': 'search' }}
               value={searchCity}
               onChange={handleSearchCity}
-            disabled={!Boolean(selectedCountry)}
+            disabled={!Boolean(selected.country)}
             />
           </Search>
           <div>
@@ -208,7 +199,7 @@ return (
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
-      >{Object.keys(Regions[selectedCountry]||{}).map((city)=>(
+      >{Object.keys(Regions[selected.country]||{}).map((city)=>(
           <MenuItem onClick={handleCloseCity}>{city}</MenuItem>
 
       ))}
@@ -217,10 +208,8 @@ return (
     </div>
         </Toolbar>
       </AppBar>
-      {/* <div>
-          {selection.country}{selection.city}
-      </div> */}
-    <NavBar setSelectedCountry={setSelectedCountry} setSearchCountry={setSearchCountry} setSearchCity={setSearchCity}></NavBar>
+
+    <NavBar setSearchCountry={setSearchCountry} setSearchCity={setSearchCity}></NavBar>
     <Outlet />
     </Box>
   );

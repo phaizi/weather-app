@@ -12,7 +12,8 @@ import Today from "./Routes/Today";
 import Hourly from './Routes/Hourly';
 import Daily from './Routes/Daily';
 import NotFound from "./Routes/NotFound";
-import {SelectedCityContext} from './Services/contexts';
+import {SelectedContext} from './Services/contexts';
+import {SearchedContext} from './Services/contexts';
 
 function AppRoutes() {
 
@@ -23,11 +24,18 @@ function AppRoutes() {
     },
   })
 
-  const [selectedCity, setSelecltedCity] = useState('');
+  // const [selectedCity, setSelecltedCity] = useState('');
+  // const [selectedCountry,setSelectedCountry] = useState('');
+  // const [searchedCountry,setSearchCountry] = useState('');
+  // const [searchedCity,setSearchCity] = useState('');
+  const [selected,setSelected] = useState({country:'',city:''});
+  const [searched,setSearched] = useState({country:'',city:''});
+
 
   return (
     <ThemeProvider theme={theme}>
- <SelectedCityContext.Provider value={[selectedCity, setSelecltedCity]}>
+ <SelectedContext.Provider value={[selected, setSelected]}>
+ <SearchedContext.Provider value={[searched, setSearched]}>
 
     <Routes>
     <Route path="/" element={<Main />}>
@@ -41,7 +49,8 @@ function AppRoutes() {
     <Route path="*" element={<NotFound />} />
   </Routes>
 
- </SelectedCityContext.Provider>
+ </SearchedContext.Provider>
+ </SelectedContext.Provider>
     </ThemeProvider>
     // <div className="App">
     //   WEATHER APP

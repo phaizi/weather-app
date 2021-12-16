@@ -1,3 +1,4 @@
 import { createContext } from 'react';
 
-export const SelectedCityContext = createContext([]);
+export const SelectedContext = createContext([]);
+export const SearchedContext = createContext([]);
