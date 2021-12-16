@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {
   Routes,
   Route
@@ -11,6 +12,7 @@ import Today from "./Routes/Today";
 import Hourly from './Routes/Hourly';
 import Daily from './Routes/Daily';
 import NotFound from "./Routes/NotFound";
+import {SelectedCityContext} from './Services/contexts';
 
 function AppRoutes() {
 
@@ -21,8 +23,11 @@ function AppRoutes() {
     },
   })
 
+  const [selectedCity, setSelecltedCity] = useState('');
+
   return (
     <ThemeProvider theme={theme}>
+ <SelectedCityContext.Provider value={[selectedCity, setSelecltedCity]}>
 
     <Routes>
     <Route path="/" element={<Main />}>
@@ -35,6 +40,8 @@ function AppRoutes() {
     </Route>
     <Route path="*" element={<NotFound />} />
   </Routes>
+
+ </SelectedCityContext.Provider>
     </ThemeProvider>
     // <div className="App">
     //   WEATHER APP
