@@ -1,13 +1,11 @@
-import React from 'react';
-// import Box from '@mui/material/Box';
+import React,{useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {  makeStyles } from '@mui/styles';
-// import Button from '@mui/material/Button';
-// import Menu from '@mui/material/Menu';
-// import MenuItem from '@mui/material/MenuItem';
-// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from '@mui/material/Container';
-
-// import {Regions} from '../Services/Regions';
+import Divider from '@mui/material/Divider';
+import SearchButton from '../Components/SearchButton';
+import {Regions} from '../Services/Regions';
+import { SelectedContext } from '../Services/contexts';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -25,61 +23,45 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         fontFamily: 'Yusei Magic,sans-serif',
     },
-    
+    instructions: {
+        color: theme.palette.secondary.main,
+      fontSize: 30,
+      fontWeight: 'bold'
+    },
+    buttonContainer: {
+      display: 'flex', 
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent:'center',
+    }
 
 }))
 export default function SimpleContainer() {
-
+  
     const classes = useStyles();
-//     const [countryMenu, setCountry] = useState(null);
-//   const openCountry = Boolean(countryMenu);
-//   const handleClickCountry = (event) => {
-//       console.log('on clik = ',event.currentTarget);
-//     setCountry(event.currentTarget);
-//   };
-//   const handleCloseCountry = (event) => {
-//       const country = event.currentTarget.innerText;
-//       if(country){
-//           setSelectedCountry(country)
-//         setSearchCountry(country);
-//       }
-//     console.log('on cllos = ',event.currentTarget.innerText);
+const [selected,setSelected] = useContext(SelectedContext);
+    const navigate = useNavigate();
 
-//     setCountry(null);
-//   };
+    const onChangeCountry = (e,value)=>{
+      setSelected({...selected,country:value});
+    }
+    const onChangeCity = (e,value)=>{
+      setSelected({...selected,city:value});
+              navigate(`/${value}/`);
+    }
 
   return (
     <div style={{ padding: '30px 0px' }}>
-
     <Container className={classes.container}>
-        <p className={classes.title}>Weather is beyond anyone's control</p>
+        <h1 className={classes.title}>Weather is beyond anyone's control</h1>
         <h1 className={classes.tagline}>But Weather app lets you plan your days ahead with more confidence..</h1>
+        <Divider variant="middle" />
+        <p className={classes.instructions}>First select the country & then select the city to know the weather there</p>
+        <div className={classes.buttonContainer}>
+        <SearchButton optionList={Object.keys(Regions)}  label='Country...' onChange={onChangeCountry} />
+          <SearchButton optionList={Object.keys(Regions[selected.country]||{})}  label='City...' disabled={!Boolean(selected.country)} onChange={onChangeCity}  />
+        </div>
     </Container>
-    {/* <Button
-      variant="contained"
-      size="large"
-        id="country-button"
-        aria-controls="basic-menu"
-        aria-haspopup="true"
-        aria-expanded={openCountry ? 'true' : undefined}
-        onClick={handleClickCountry}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Country
-      </Button>
-      <Menu
-        id="country-menu"
-        anchorEl={countryMenu}
-        open={openCountry}
-        onClose={handleCloseCountry}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >{Object.keys(Regions).map((country)=>(
-        <MenuItem onClick={handleCloseCountry}>{country}</MenuItem>
-      ))}
-      </Menu> */}
-      {/* <CountryButton/> */}
     </div>
   );
 }
