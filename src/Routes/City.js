@@ -1,7 +1,7 @@
 import React,
 {useState,useEffect,useContext} 
 from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { SelectedContext, WeatherContext } from '../Services/contexts';
 import { Regions } from '../Services/Regions';
 import { fetchData } from '../Services/fetchData';
@@ -9,7 +9,7 @@ import { fetchData } from '../Services/fetchData';
 export default function City(){
 
     const [weatherData,setWeatherData] = useState({});
-    const [selected,setSelected] = useContext(SelectedContext);
+    const [selected,] = useContext(SelectedContext);
     const [isLoading,setLoading] = useState(false);
     // const [weatherData,setWeatheData] = useContext(WeatherContext);
     // const {city} = useParams();
@@ -35,11 +35,11 @@ console.log(`lat = ${lat}    lon = ${lon}`);
 // const [weather,setWeather] = useState({current:{},hourly:[],daily:[]});    
 
     return (
-      <WeatherContext.Provider value={weatherData, setWeatherData}>
+      <WeatherContext.Provider value={[weatherData, setWeatherData, isLoading]}>
 
         <div>
 
-        <div>City is {selected.city}  </div>
+        {/* <div>City is {selected.city}  </div> */}
         {/* <div>wether is {weatherData}  </div> */}
         <Outlet/>
         </div>
