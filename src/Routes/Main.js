@@ -70,7 +70,7 @@ const onChangeCountry = (e,value)=>{
 }
 const onChangeCity = (e,value)=>{
   setSelected({...selected,city:value});
-          navigate(`/${value}/`);
+          navigate(`/cities/${value}/`);
 }
 
 // const handleSearchCountry = (event)=>{

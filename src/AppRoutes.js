@@ -40,13 +40,13 @@ function AppRoutes() {
     <Routes>
     <Route path="/" element={<Main />}>
       <Route index element={<Home />} />
-      <Route path=":city" element={<City />}>
+      <Route path="cities/:city" element={<City />}>
         <Route index element={<Today />} />
         <Route path="hourly" element={<Hourly />} />
         <Route path="daily" element={<Daily />} />
       </Route>
-    </Route>
     <Route path="*" element={<NotFound />} />
+    </Route>
   </Routes>
 
  {/* </SearchedContext.Provider> */}

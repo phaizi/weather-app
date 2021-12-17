@@ -15,9 +15,12 @@ export default function NavBar({ setSearchCountry, setSearchCity}) {
         if(!selected.city){
 
             const url = window.location.pathname;
-            const endIndex =url.slice(1).indexOf('/');
-        let city = endIndex===-1?url.slice(1):url.slice(1,endIndex+1);
-        city = city.charAt(0).toUpperCase() + city.slice(1);
+            // const endIndex =url.slice(1).indexOf('/');
+            const endIndex =url.slice(8).indexOf('/');
+            console.log('city end index = ',endIndex);
+        let city = endIndex===-1?url.slice(8):url.slice(8,endIndex+8);
+        console.log('city before uppurcase = ', city);
+        city = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
         const countries = Object.keys(Regions);
         countries.forEach((country) => {
             if(city in Regions[country]){
@@ -58,13 +61,13 @@ export default function NavBar({ setSearchCountry, setSearchCity}) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab component={Link} value='/' to={`/${selected.city}/`} label="Today" 
+          <Tab component={Link} value='/' to={`/cities/${selected.city}/`} label="Today" 
         disabled={!selected.city}
           />
-          <Tab component={Link} value='/hourly/' to= {`/${selected.city}/hourly/`} label="Hourly" 
+          <Tab component={Link} value='/hourly/' to= {`/cities/${selected.city}/hourly/`} label="Hourly" 
           disabled={!selected.city}
           />
-          <Tab component={Link} value='/daily/' to={`/${selected.city}/daily/`} label="Daily" 
+          <Tab component={Link} value='/daily/' to={`/cities/${selected.city}/daily/`} label="Daily" 
           disabled={!selected.city}
           />
         </Tabs>
