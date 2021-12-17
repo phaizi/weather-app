@@ -22,12 +22,12 @@ export default function NavBar({ setSearchCountry, setSearchCity}) {
         countries.forEach((country) => {
             if(city in Regions[country]){
                 setSelected({country, city});
-                setSearchCountry(country);
+                // setSearchCountry(country);
                 console.log('selectedCountry = ',country);
             }
         })
         // setSelected({...selected, city});
-        setSearchCity(city);
+        // setSearchCity(city);
         console.log('url city is = ', city);
       } 
     },[]) //eslint-disable-line 

@@ -13,7 +13,7 @@ import Hourly from './Routes/Hourly';
 import Daily from './Routes/Daily';
 import NotFound from "./Routes/NotFound";
 import {SelectedContext} from './Services/contexts';
-import {SearchedContext} from './Services/contexts';
+// import {SearchedContext} from './Services/contexts';
 
 function AppRoutes() {
 
@@ -29,13 +29,13 @@ function AppRoutes() {
   // const [searchedCountry,setSearchCountry] = useState('');
   // const [searchedCity,setSearchCity] = useState('');
   const [selected,setSelected] = useState({country:'',city:''});
-  const [searched,setSearched] = useState({country:'',city:''});
+  // const [searched,setSearched] = useState({country:'',city:''});
 
 
   return (
     <ThemeProvider theme={theme}>
  <SelectedContext.Provider value={[selected, setSelected]}>
- <SearchedContext.Provider value={[searched, setSearched]}>
+ {/* <SearchedContext.Provider value={[searched, setSearched]}> */}
 
     <Routes>
     <Route path="/" element={<Main />}>
@@ -49,7 +49,7 @@ function AppRoutes() {
     <Route path="*" element={<NotFound />} />
   </Routes>
 
- </SearchedContext.Provider>
+ {/* </SearchedContext.Provider> */}
  </SelectedContext.Provider>
     </ThemeProvider>
     // <div className="App">

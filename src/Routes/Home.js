@@ -6,7 +6,6 @@ import {  makeStyles } from '@mui/styles';
 // import MenuItem from '@mui/material/MenuItem';
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from '@mui/material/Container';
-import CountryButton from '../Components/CountryButton';
 
 // import {Regions} from '../Services/Regions';
 
@@ -80,7 +79,7 @@ export default function SimpleContainer() {
         <MenuItem onClick={handleCloseCountry}>{country}</MenuItem>
       ))}
       </Menu> */}
-      <CountryButton/>
+      {/* <CountryButton/> */}
     </div>
   );
 }
