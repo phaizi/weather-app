@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -10,6 +10,7 @@ import {Regions} from '../Services/Regions';
 
 export default function NavBar({ setSearchCountry, setSearchCity}) {
 
+  const navigate = useNavigate();
     const [selected,setSelected] = useContext(SelectedContext);
     useEffect(()=>{
         if(!selected.city){
@@ -28,6 +29,9 @@ export default function NavBar({ setSearchCountry, setSearchCity}) {
                 // setSearchCountry(country);
                 console.log('selectedCountry = ',country);
             }
+            //  else{
+            //   navigate()
+            // }
         })
         // setSelected({...selected, city});
         // setSearchCity(city);

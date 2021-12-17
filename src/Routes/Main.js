@@ -69,8 +69,10 @@ const onChangeCountry = (e,value)=>{
   setSelected({...selected,country:value});
 }
 const onChangeCity = (e,value)=>{
+  if (value){                             //done so that if search city is cleared it wont change the url to null
   setSelected({...selected,city:value});
           navigate(`/cities/${value}/`);
+}
 }
 
 // const handleSearchCountry = (event)=>{

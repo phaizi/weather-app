@@ -46,8 +46,13 @@ const [selected,setSelected] = useContext(SelectedContext);
       setSelected({...selected,country:value});
     }
     const onChangeCity = (e,value)=>{
-      setSelected({...selected,city:value});
-              navigate(`/${value}/`);
+      console.log('onCHange city = ', value)
+
+      if (value){
+        console.log('null city should not run = ', value)
+        setSelected({...selected,city:value});
+        navigate(`/cities/${value}/`);
+      }
     }
 
   return (
