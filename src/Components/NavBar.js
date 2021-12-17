@@ -48,7 +48,9 @@ export default function NavBar({ setSearchCountry, setSearchCity}) {
         location = '/';
         console.log('location = ',location);
     }
-    // it is done to catch urls ending with '/' also
+    /*it is done so that navbar catches urls ending with '/' also, so that navbar tabs work properly.. 
+    though the content of each tab is rendered through <Outlet/> and reactrouter 
+    by matching borwser address with each routes' path*/
 
   return (
     <Box sx={{ bgcolor: 'background.paper', flexGrow:1 }}>
