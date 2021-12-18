@@ -87,8 +87,8 @@ export default function Today(){
  <Box sx={{display:'flex',flexWrap:'wrap',gap: '10px'}}>
             <div>
                 <p className={classes.time}>As on {date}</p>
-                <h1 className={classes.temp}>{current?.temp}°C</h1>
-                <h3 className={classes.feelslike}><span className={classes.feelslikespan}>feels like </span>{current?.feels_like}°C </h3>
+                <h1 className={classes.temp}>{(Math.round(current?.temp * 10) / 10).toFixed(1)}°C</h1>
+                <h3 className={classes.feelslike}><span className={classes.feelslikespan}>feels like </span>{(Math.round(current?.feels_like * 10) / 10).toFixed(1)}°C </h3>
                 </div>
 <Divider orientation="vertical"  variant="middle" flexItem />
 <List sx={{width:'50%'}} aria-label="weather details">

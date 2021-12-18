@@ -12,7 +12,7 @@ import Today from "./Routes/Today";
 import Hourly from './Routes/Hourly';
 import Daily from './Routes/Daily';
 import NotFound from "./Routes/NotFound";
-import {SelectedContext, WeatherContext} from './Services/contexts';
+import {SelectedContext} from './Services/contexts';
 // import {SearchedContext} from './Services/contexts';
 
 function AppRoutes() {
