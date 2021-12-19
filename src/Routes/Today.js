@@ -94,7 +94,7 @@ export default function Today() {
       <Container className={classes.weatherContainer}>
         {isLoading ? (
           <Loader />
-        ) : doesErrorOccured ? (
+        ) : (doesErrorOccured || !current) ? (
           <NetworkError />
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>

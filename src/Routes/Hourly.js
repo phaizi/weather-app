@@ -70,7 +70,7 @@ export default function Hourly() {
       <Container className={classes.weatherContainer}>
         {isLoading ? (
           <Loader />
-        ) : doesErrorOccured ? (
+        ) : (doesErrorOccured || !hourly) ? (
           <NetworkError />
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>

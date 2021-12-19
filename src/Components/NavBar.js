@@ -1,9 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {
-  Link,
-  useLocation,
-  // useNavigate
-} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -12,7 +8,6 @@ import { SelectedContext } from "../Services/contexts";
 import { Regions } from "../Services/Regions";
 
 export default function NavBar({ setSearchCountry, setSearchCity }) {
-  // const navigate = useNavigate();
   const [selected, setSelected] = useContext(SelectedContext);
   useEffect(() => {
     if (!selected.city) {
@@ -25,9 +20,6 @@ export default function NavBar({ setSearchCountry, setSearchCity }) {
         if (city in Regions[country]) {
           setSelected({ country, city });
         }
-        //  else{
-        //   navigate()
-        // }
       });
     }
   }, []); //eslint-disable-line
