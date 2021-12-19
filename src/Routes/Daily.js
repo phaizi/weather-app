@@ -46,7 +46,6 @@ export default function Daily() {
     useContext(WeatherContext);
   const { timezone, daily } = weatherData;
 
-
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>
@@ -60,7 +59,7 @@ export default function Daily() {
       <Container className={classes.weatherContainer}>
         {isLoading ? (
           <Loader />
-        ) : (doesErrorOccured || !daily) ? (
+        ) : doesErrorOccured || !daily ? (
           <NetworkError />
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
@@ -74,18 +73,20 @@ export default function Daily() {
                   day: "numeric",
                   weekday: "short",
                 });
-              
+
                 return (
                   <div>
                     <div className={classes.listItemsContainer}>
-                      <h2 style={{ color: "black", width:'150px' }}>{date}</h2>
+                      <h2 style={{ color: "black", width: "150px" }}>{date}</h2>
                       <div>
-                      <h1 style={{ width: "150px", marginBottom:0 }}>
-                        {`${(Math.round(data.temp.max * 10) / 10).toFixed(1)}°C/${(Math.round(data.temp.min * 10) / 10).toFixed(1)}°C `}
-                      </h1>
-                      <p style={{ fontSize: 15, margin: 0 }}>
-                          {"Max/Min"}
-                        </p>
+                        <h1 style={{ width: "150px", marginBottom: 0 }}>
+                          {`${(Math.round(data.temp.max * 10) / 10).toFixed(
+                            1
+                          )}°C/${(Math.round(data.temp.min * 10) / 10).toFixed(
+                            1
+                          )}°C `}
+                        </h1>
+                        <p style={{ fontSize: 15, margin: 0 }}>{"Max/Min"}</p>
                       </div>
                       <h2>{data.weather[0].main}</h2>
                       <div>

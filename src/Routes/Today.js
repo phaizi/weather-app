@@ -51,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 30,
     margin: "20",
   },
+  description: {
+    color: "white",
+    fontSize: 30,
+    margin: "20",
+  },
 }));
 
 const selectedKeys = ["pressure", "humidity", "wind_speed", "wind_deg"];
@@ -94,7 +99,7 @@ export default function Today() {
       <Container className={classes.weatherContainer}>
         {isLoading ? (
           <Loader />
-        ) : (doesErrorOccured || !current) ? (
+        ) : doesErrorOccured || !current ? (
           <NetworkError />
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
@@ -106,6 +111,9 @@ export default function Today() {
               <h3 className={classes.feelslike}>
                 <span className={classes.feelslikespan}>feels like </span>
                 {(Math.round(current?.feels_like * 10) / 10).toFixed(1)}°C{" "}
+              </h3>
+              <h3 className={classes.description}>
+                {current?.weather[0].description}
               </h3>
             </div>
             <Divider orientation="vertical" variant="middle" flexItem />
