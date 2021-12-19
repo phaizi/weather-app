@@ -8,6 +8,8 @@ import Loader from "../Components/Loader";
 import NetworkError from "../Components/NetworkError";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Daily() {
   const classes = useStyles();
   const params = useParams();
+  const theme = useTheme();
+  const isNotXSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+  const dateWidth = isNotXSmallScreen ? 150 : '100%';
   const [weatherData, , isLoading, doesErrorOccured] =
     useContext(WeatherContext);
   const { timezone, daily } = weatherData;
@@ -87,9 +92,9 @@ export default function Daily() {
                 return (
                   <div>
                     <div className={classes.listItemsContainer}>
-                      <h2 style={{ color: "black", width: "150px" }}>{date}</h2>
+                      <h2 style={{ color: "black", width: dateWidth }}>{date}</h2>
                       <div>
-                        <h2 style={{ width: "250px", marginBottom: 0 }}>
+                        <h2 style={{ width: "180px", marginBottom: 0 }}>
                           {`${(Math.round(data.temp.max * 10) / 10).toFixed(
                             1
                           )}°C/${(Math.round(data.temp.min * 10) / 10).toFixed(
