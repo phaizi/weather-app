@@ -30,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
       padding: "20px 30px",
     },
   },
+  temperatureContainer:{
+      width:'100%',
+    [theme.breakpoints.up("lg")]: {
+        width:'40%'
+    }
+  },
   title: {
     color: theme.palette.secondary.main,
     fontSize: 30,
@@ -114,8 +120,8 @@ export default function Today() {
         ) : doesErrorOccured || !current ? (
           <NetworkError />
         ) : (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-            <div>
+          <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent:'space-around', gap: "10px" }}>
+            <div className={classes.temperatureContainer}>
               {/* <p className={classes.time}>As on {date}</p> */}
               <Typography sx={{ fontSize: { xs: 20, sm: 30 } }}>
                 As on {date}
@@ -153,17 +159,17 @@ export default function Today() {
                 {current?.weather[0].description}
               </h3> */}
             </div>
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <List sx={{ width: "50%" }} aria-label="weather details">
+            {/* <Divider orientation="vertical" variant="middle" flexItem /> */}
+            <List sx={{ width: {xs:"100%",lg:"50%"} }} aria-label="weather details">
               <Divider />
               {selectedKeys.map((item, index) => (
                 <div>
                   <ListItem
                     sx={{
                       color: "white",
-                      fontSize: 20,
+                      fontSize: {xs:10,sm:20,},
                       fontWeight: "medium",
-                      height: 100,
+                      height: {xs:33,sm:100,}, 
                     }}
                     secondaryAction={
                       <h1>{weatherValues && weatherValues[index]}</h1>
