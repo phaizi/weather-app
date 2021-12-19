@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: "#808080",
     '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
       paddingLeft: 26,
     },
