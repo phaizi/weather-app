@@ -76,7 +76,7 @@ console.log('this is HOURLY time = ',time)
 
      return(
         <div>
-            {time==='12:00 AM' && <div><h2>{nextDayDate}</h2><Divider/></div>}
+            {time.slice(0,2)==='12' && time.slice(-2)==='AM' && <div><h2>{nextDayDate}</h2><Divider/></div>}
             <div className={classes.listItemsContainer}>
                 <h2 style={{color:'black'}}>{time}</h2>
                 <h1 style={{width:'150px'}}>{(Math.round(data.temp * 10) / 10).toFixed(1) + '°C'}</h1>
