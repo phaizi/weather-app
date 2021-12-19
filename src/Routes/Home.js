@@ -14,25 +14,36 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.secondary.main,
-    fontSize: 60,
+    fontSize: 30,
     fontWeight: "bold",
     margin: 0,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 60,
+		}
   },
   tagline: {
     color: theme.palette.primary.main,
+    fontSize: 20, 
     textAlign: "center",
     fontFamily: "Yusei Magic,sans-serif",
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 40, 
+		}
   },
   instructions: {
     color: theme.palette.secondary.main,
-    fontSize: 30,
-    fontWeight: "bold",
+    fontSize: 15,
+    fontWeight: "bold", 
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 30, 
+		}
   },
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    gap:10
   },
 }));
 export default function SimpleContainer() {

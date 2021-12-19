@@ -1,6 +1,8 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,13 +29,18 @@ export default function SearchButton({
   disabled,
 }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const isNotXSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+  const isNotSmallScreen = useMediaQuery(theme.breakpoints.up("md"));
 
+  const maxWidth = isNotSmallScreen ? undefined : isNotXSmallScreen ? 185 : undefined;
   return (
     <Autocomplete
       classes={classes}
       onChange={onChange}
       options={optionList}
-      style={{ width: 300 }}
+      style={{ width: 300,maxWidth}}
+      size={isNotSmallScreen?'medium':'small'}
       renderInput={(params) => {
         return (
           <TextField

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
+import { Box, } from "@mui/system";
 import Container from "@mui/material/Container";
 import { WeatherContext } from "../Services/contexts";
 import Loader from "../Components/Loader";
@@ -9,25 +9,36 @@ import NetworkError from "../Components/NetworkError";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "20px",
     alignContent: "center",
     textAlign: "center",
+
+    // [theme.breakpoints.up("sm")]: {
+    //   textAlign: "center",
+    // },
   },
   weatherContainer: {
     margin: "0px auto",
     backgroundColor: theme.palette.secondary.light,
-    padding: "20px 30px",
     boxShadow: "5px 5px 25px 2px #888888",
+    padding: "20px 10px",
+    [theme.breakpoints.up("sm")]: {
+      padding: "20px 30px",
+    },
   },
   title: {
     color: theme.palette.secondary.main,
-    fontSize: 60,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 20,
     marginTop: 0,
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 60,
+    },
   },
   cityTitle: {
     color: theme.palette.primary.main,
@@ -54,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
   description: {
     color: "white",
     fontSize: 30,
+    fontWeight:'bold',
     margin: "20",
   },
 }));
@@ -78,7 +90,7 @@ export default function Today() {
       timeZone: timezone,
       month: "long",
       day: "numeric",
-      year: "numeric",
+      //   year: "numeric",
       time: "numeric",
     });
     weatherValues = selectedKeys.map(
@@ -104,17 +116,42 @@ export default function Today() {
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             <div>
-              <p className={classes.time}>As on {date}</p>
-              <h1 className={classes.temp}>
+              {/* <p className={classes.time}>As on {date}</p> */}
+              <Typography sx={{ fontSize: { xs: 20, sm: 30 } }}>
+                As on {date}
+              </Typography>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: { xs: 90, sm: 150 },
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
                 {(Math.round(current?.temp * 10) / 10).toFixed(1)}°C
-              </h1>
-              <h3 className={classes.feelslike}>
+              </Typography>
+              {/* <h1 className={classes.temp}>
+                {(Math.round(current?.temp * 10) / 10).toFixed(1)}°C
+              </h1> */}
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: { xs: 40, sm: 60 },
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
                 <span className={classes.feelslikespan}>feels like </span>
                 {(Math.round(current?.feels_like * 10) / 10).toFixed(1)}°C{" "}
-              </h3>
-              <h3 className={classes.description}>
+              </Typography>
+              {/* <h3 className={classes.feelslike}>
+                <span className={classes.feelslikespan}>feels like </span>
+                {(Math.round(current?.feels_like * 10) / 10).toFixed(1)}°C{" "}
+              </h3> */}
+              <Typography className={classes.description}>{current?.weather[0].description}</Typography>
+              {/* <h3 className={classes.description}>
                 {current?.weather[0].description}
-              </h3>
+              </h3> */}
             </div>
             <Divider orientation="vertical" variant="middle" flexItem />
             <List sx={{ width: "50%" }} aria-label="weather details">

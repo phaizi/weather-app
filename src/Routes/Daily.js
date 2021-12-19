@@ -23,10 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.secondary.main,
-    fontSize: 60,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 20,
     marginTop: 0,
+    [theme.breakpoints.up('sm')]: {
+        fontSize: 60,
+          }
   },
   cityTitle: {
     color: theme.palette.primary.main,
