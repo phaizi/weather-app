@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: 20,
     marginTop: 0,
-    [theme.breakpoints.up('sm')]: {
-        fontSize: 60,
-          }
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 60,
+    },
   },
   cityTitle: {
     color: theme.palette.primary.main,
@@ -104,9 +104,9 @@ export default function Hourly() {
                     )}
                     <div className={classes.listItemsContainer}>
                       <h2 style={{ color: "black" }}>{time}</h2>
-                      <h1 style={{ width: "150px" }}>
+                      <h2 style={{ width: "150px" }}>
                         {(Math.round(data.temp * 10) / 10).toFixed(1) + "°C"}
-                      </h1>
+                      </h2>
                       <h2>{data.weather[0].main}</h2>
                       <div>
                         <h2 style={{ width: "250px", marginBottom: 0 }}>

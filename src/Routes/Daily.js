@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: 20,
     marginTop: 0,
-    [theme.breakpoints.up('sm')]: {
-        fontSize: 60,
-          }
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 60,
+    },
   },
   cityTitle: {
     color: theme.palette.primary.main,
@@ -65,7 +65,14 @@ export default function Daily() {
         ) : doesErrorOccured || !daily ? (
           <NetworkError />
         ) : (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+              gap: "10px",
+            }}
+          >
             <List sx={{ width: "100%" }} aria-label="weather details">
               <Divider />
               {daily?.map((data, index) => {
@@ -82,13 +89,13 @@ export default function Daily() {
                     <div className={classes.listItemsContainer}>
                       <h2 style={{ color: "black", width: "150px" }}>{date}</h2>
                       <div>
-                        <h1 style={{ width: "150px", marginBottom: 0 }}>
+                        <h2 style={{ width: "250px", marginBottom: 0 }}>
                           {`${(Math.round(data.temp.max * 10) / 10).toFixed(
                             1
                           )}°C/${(Math.round(data.temp.min * 10) / 10).toFixed(
                             1
                           )}°C `}
-                        </h1>
+                        </h2>
                         <p style={{ fontSize: 15, margin: 0 }}>{"Max/Min"}</p>
                       </div>
                       <h2>{data.weather[0].main}</h2>
