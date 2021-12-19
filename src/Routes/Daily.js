@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import Container from '@mui/material/Container';
 import { WeatherContext } from '../Services/contexts';
 import Loader from '../Components/Loader';
+import NetworkError from '../Components/NetworkError';
 // import Divider from '@mui/material/Divider';
 // import List from '@mui/material/List';
 // import ListItem from '@mui/material/ListItem';
@@ -39,7 +40,7 @@ export default function Daily(){
 
     const classes = useStyles();
     const params = useParams();
-    const [ , isLoading] = useContext(WeatherContext); 
+    const [ , isLoading, doesNetworkOccured] = useContext(WeatherContext); 
     // const {timezone, dailyData} = weatherData;
 
     return (
@@ -47,7 +48,7 @@ export default function Daily(){
         <h1 className={classes.title}>Daily Weather - <span className={classes.cityTitle}>{params.city.charAt(0).toUpperCase() + params.city.slice(1).toLowerCase()}</span></h1>
 
  <Container className={classes.weatherContainer}>
-            {isLoading?<Loader/>:
+            {isLoading?<Loader/> : doesNetworkOccured? <NetworkError/> :
     <Box sx={{display:'flex',flexWrap:'wrap',gap: '10px'}}>
      </Box>
     }

@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import Container from '@mui/material/Container';
 import { WeatherContext } from '../Services/contexts';
 import Loader from '../Components/Loader';
+import NetworkError from '../Components/NetworkError';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 // import ListItem from '@mui/material/ListItem';
@@ -43,7 +44,7 @@ export default function Hourly(){
 
     const classes = useStyles();
     const params = useParams();
-    const [weatherData, , isLoading] = useContext(WeatherContext); 
+    const [weatherData, , isLoading, doesErrorOccured] = useContext(WeatherContext); 
     const {timezone, hourly} = weatherData;
     console.log('HOURLY WAETHER DATA = ', hourly)
 
@@ -58,12 +59,13 @@ export default function Hourly(){
         <h1 className={classes.title}>Hourly Weather - <span className={classes.cityTitle}>{params.city.charAt(0).toUpperCase() + params.city.slice(1).toLowerCase()}</span></h1>
 
  <Container className={classes.weatherContainer}>
-            {hourly&&!isLoading?
+            {/* {hourly&&!isLoading? */}
+            {isLoading?<Loader/>: doesErrorOccured? <NetworkError/> :
  <Box sx={{display:'flex',flexWrap:'wrap',gap: '10px'}}>
      <List sx={{width:'100%'}} aria-label="weather details">
          <h2>{todayDate}</h2>
          <Divider/>
-     {hourly.map((data,index)=>{
+     {hourly?.map((data,index)=>{
     dateObj = new Date(data.dt*1000);
     nextDayDate = dateObj.toLocaleDateString("en-US", {timeZone: timezone, month:'long', day:'numeric',weekday:'long'})
     time = dateObj.toLocaleTimeString("en-US", {timeZone: timezone, hour:'2-digit', minute:'2-digit'})
@@ -91,7 +93,7 @@ console.log('this is HOURLY time = ',time)
      )})
     }
      </List>
-     </Box> : <Loader/>
+     </Box>
 }
 </Container>
 </div>

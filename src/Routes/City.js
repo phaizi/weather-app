@@ -11,8 +11,8 @@ export default function City(){
     const [weatherData,setWeatherData] = useState({});
     const [selected,] = useContext(SelectedContext);
     const [isLoading,setLoading] = useState(false);
-    // const [weatherData,setWeatheData] = useContext(WeatherContext);
-    // const {city} = useParams();
+    const [doesErrorOccured,setError] = useState(false);
+
     let lat, lon
     if(selected.country && selected.city in Regions[selected.country]){
         const cityCooridates = Regions[selected.country][selected.city];
@@ -27,20 +27,17 @@ console.log(`lat = ${lat}    lon = ${lon}`);
     useEffect(()=>{ 
         if(lat){
             setLoading(true);
-            fetchData(lat,lon,setWeatherData,setLoading);
+            fetchData(lat,lon,setWeatherData,setLoading,setError);
 
         }
-      },[lat,lon,setWeatherData,setLoading])
+      },[lat,lon,setWeatherData,setLoading,setError])
  
 // const [weather,setWeather] = useState({current:{},hourly:[],daily:[]});    
 
     return (
-      <WeatherContext.Provider value={[weatherData, setWeatherData, isLoading]}>
+      <WeatherContext.Provider value={[weatherData, setWeatherData, isLoading, doesErrorOccured]}>
 
         <div>
-
-        {/* <div>City is {selected.city}  </div> */}
-        {/* <div>wether is {weatherData}  </div> */}
         <Outlet/>
         </div>
         </WeatherContext.Provider>

@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import Container from '@mui/material/Container';
 import { WeatherContext } from '../Services/contexts';
 import Loader from '../Components/Loader';
+import NetworkError from '../Components/NetworkError';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -66,7 +67,7 @@ export default function Today(){
     let weatherValues
     const classes = useStyles();
     const params = useParams();
-    const [weatherData, , isLoading] = useContext(WeatherContext); 
+    const [weatherData, , isLoading, doesErrorOccured] = useContext(WeatherContext); 
     const {timezone, current} = weatherData;
     let dateObj,date
     if(current){
@@ -83,7 +84,8 @@ export default function Today(){
         <h1 className={classes.title}>Today's Weather - <span className={classes.cityTitle}>{params.city.charAt(0).toUpperCase() + params.city.slice(1).toLowerCase()}</span></h1>
 
  <Container className={classes.weatherContainer}>
-            {isLoading?<Loader/>:
+            {isLoading?<Loader/>: doesErrorOccured? <NetworkError/> :
+
  <Box sx={{display:'flex',flexWrap:'wrap',gap: '10px'}}>
             <div>
                 <p className={classes.time}>As on {date}</p>
